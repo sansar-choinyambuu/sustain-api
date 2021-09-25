@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_restx import Resource, Api, reqparse
 import json
+from mongo import Mongo
 
 app = Flask(__name__)
 api = Api(
@@ -12,6 +13,8 @@ api = Api(
 api.namespaces.clear()
 score_ns = api.namespace("score", description="Sustainability score")
 product_ns = api.namespace("product", description="Product and Recommendations")
+
+mongo = Mongo()
 
 customers = {
     "cus1": {"name": "Sansar", "age": 34, "score": 100, "carts": ["cart1", "cart2"]},
@@ -45,7 +48,7 @@ class Customer(Resource):
     def get(self):
         args = request.args
         customer_id = args["customer_id"]
-        return jsonify(customers[customer_id])
+        return jsonify(mongo.get_customer(customer_id))
 
 @score_ns.route("/cart")
 @score_ns.expect(cart_parser)
