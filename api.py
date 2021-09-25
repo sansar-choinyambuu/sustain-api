@@ -29,6 +29,10 @@ customer_parser.add_argument("customer_id", type=str, required=True, help="Custo
 product_parser = reqparse.RequestParser()
 product_parser.add_argument("product_id", type=str, required=True, help="Product ID")
 
+@app.after_request
+def apply_caching(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
 
 # Returns all purchases for a customer id
 @score_ns.route("/customer")
