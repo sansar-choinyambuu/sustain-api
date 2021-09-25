@@ -9,7 +9,7 @@ api = Api(
     app,
     version="1.0",
     title="Sustainability API",
-    description="REST API that provides sustainability score for customer/cart/product",
+    description="REST API that provides sustainability score for customer/cart/product and recommends more sustainable product options",
 )
 api.namespaces.clear()
 score_ns = api.namespace("score", description="Sustainability score")
