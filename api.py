@@ -24,7 +24,8 @@ product = {
 }
 
 recommendations ={
-    "meat": {"bad": [232317087500, 220220040000, 241110501000], "good": [241102765000, 220220030020, 232300185300]}
+    "meat": {"bad": [232317087500, 220220040000, 241110501000], "good": [241102765000, 220220030020, 232300185300]},
+    "dairy": {"bad": [204105600000, 210401724000, 205008000000], "good": [205050100000, 210404024000, 204104300200]}
 }
 
 customer_parser = reqparse.RequestParser()
@@ -34,7 +35,7 @@ product_parser = reqparse.RequestParser()
 product_parser.add_argument("product_id", type=str, required=True, help="Product ID")
 
 recommendation_parser = reqparse.RequestParser()
-recommendation_parser.add_argument("category", type=str, required=True, help="Category: [meat]")
+recommendation_parser.add_argument("category", type=str, required=True, help="Category: [meat, dairy]")
 
 @app.after_request
 def apply_caching(response):
