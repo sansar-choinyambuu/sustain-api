@@ -65,6 +65,15 @@ class Mongo:
         product = self.__find_one__(PRODUCT_COL, {"id": product_id}, {"id": 1, "name": 1, "_id": 0, "image.original": 1, "price.item.price": 1, "m_check2": 1})
         return product
 
+    def get_recommended_info(self, product_ids):
+        result = {"bad": [], "good": []}
+        for item in product_ids["bad"]:
+            result["bad"].append(self.get_product_info(str(item)))
+        for item in product_ids["good"]:
+            result["good"].append(self.get_product_info(str(item)))
+
+        return result
+
     def get_customer(self, customer_id: str, last_n=5):
         customer = self.__find_one__(CUSTOMER_COL, {"id": customer_id})
         ret = {"id": customer["id"]}

@@ -73,7 +73,10 @@ class Recommendation(Resource):
         args = request.args
         category_name = args["category"]
         if category_name in recommendations:
-            return jsonify(recommendations[category_name])
+            # print(recommendations[category_name]["bad"][0])
+
+            return jsonify(mongo.get_recommended_info(recommendations[category_name]))
+            # return jsonify(recommendations[category_name])
         else:
             return jsonify(["This category does not exist!"])
 
