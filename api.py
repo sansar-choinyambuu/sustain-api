@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_restx import Resource, Api, reqparse
 import json
+import pymongo
 from mongo import Mongo
 
 app = Flask(__name__)
@@ -42,6 +43,7 @@ product_parser = reqparse.RequestParser()
 product_parser.add_argument("product_id", type=str, required=True, help="Product ID")
 
 
+# Returns all purchases for a customer id
 @score_ns.route("/customer")
 @score_ns.expect(customer_parser)
 class Customer(Resource):
@@ -56,6 +58,7 @@ class Cart(Resource):
     def get(self):
         args = request.args
         cart_id = args["cart_id"]
+        print(cart[cart_id])
         return jsonify(cart[cart_id])
 
 @product_ns.route("/recommendation")
