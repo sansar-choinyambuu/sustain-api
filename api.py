@@ -23,11 +23,18 @@ product = {
     "prod3": {"name": "flour", "score": 2}
 }
 
+recommendations ={
+    "meat": {"bad": [232317087500, 220220040000, 241110501000], "good": [241102765000, 220220030020, 232300185300]}
+}
+
 customer_parser = reqparse.RequestParser()
 customer_parser.add_argument("customer_id", type=str, required=True, help="Customer ID")
 
 product_parser = reqparse.RequestParser()
 product_parser.add_argument("product_id", type=str, required=True, help="Product ID")
+
+recommendation_parser = reqparse.RequestParser()
+recommendation_parser.add_argument("category", type=str, required=True, help="Category: [meat]")
 
 @app.after_request
 def apply_caching(response):
@@ -44,12 +51,15 @@ class Customer(Resource):
         return jsonify(mongo.get_customer(customer_id))
 
 @product_ns.route("/recommendation")
-@product_ns.expect(product_parser)
+@product_ns.expect(recommendation_parser)
 class Recommendation(Resource):
     def get(self):
         args = request.args
-        product_id = args["product_id"]
-        return jsonify(["Don't buy the product"])
+        category_name = args["category"]
+        if category_name in recommendations:
+            return jsonify(recommendations[category_name])
+        else:
+            return jsonify(["This category does not exist!"])
 
 @product_ns.route("/info")
 @product_ns.expect(product_parser)
