@@ -61,6 +61,10 @@ class Mongo:
         col = self.db[collection]
         return col.find_one(query, projection)
 
+    def get_product_info(self, product_id: str):
+        product = self.__find_one__(PRODUCT_COL, {"id": product_id}, {"id": 1, "name": 1, "_id": 0, "image.original": 1, "price.item.price": 1, "m_check2": 1})
+        return product
+
     def get_customer(self, customer_id: str, last_n=5):
         customer = self.__find_one__(CUSTOMER_COL, {"id": customer_id})
         ret = {"id": customer["id"]}

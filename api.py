@@ -57,7 +57,7 @@ class ProductInfo(Resource):
     def get(self):
         args = request.args
         product_id = args["product_id"]
-        return jsonify(product[product_id])
+        return jsonify(mongo.get_product_info(product_id))
 
 
 api.add_resource(Customer, "/customer")
