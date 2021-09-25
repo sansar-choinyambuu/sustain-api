@@ -8,3 +8,4 @@ cat ../data/shoppingcart/*.csv | ../mongodb-tools/bin/mongoimport \
 
 # import to local mongodb
 cat ../data/products/de/*.json | mongodb-tools/bin/mongoimport --host localhost --collection products
+cat ../data/shoppingcart/*.csv | mongodb-tools/bin/mongoimport --host localhost --collection carts --type=csv --fieldFile=fields.txt
