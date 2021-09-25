@@ -31,18 +31,25 @@ recommendations ={
 customer_parser = reqparse.RequestParser()
 customer_parser.add_argument("customer_id", type=str, required=True, help="Customer ID")
 
+customization_parser = reqparse.RequestParser()
+customization_parser.add_argument("customer_id", type=str, required=True, help="Customer ID")
+customization_parser.add_argument("footprint", type=str, required=True, help="Carbon footprint")
+customization_parser.add_argument("water", type=str, required=True, help="Water scarcity")
+customization_parser.add_argument("animals", type=str, required=True, help="Animal welfare")
+
 product_parser = reqparse.RequestParser()
 product_parser.add_argument("product_id", type=str, required=True, help="Product ID")
 
 recommendation_parser = reqparse.RequestParser()
 recommendation_parser.add_argument("category", type=str, required=True, help="Category: [meat, dairy]")
 
+# TODO elaborate security measures
+
 @app.after_request
 def apply_caching(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
-# Returns all purchases for a customer id
 @score_ns.route("/customer")
 @score_ns.expect(customer_parser)
 class Customer(Resource):
@@ -50,6 +57,14 @@ class Customer(Resource):
         args = request.args
         customer_id = args["customer_id"]
         return jsonify(mongo.get_customer(customer_id))
+
+@score_ns.route("/customization")
+@score_ns.expect(customization_parser)
+class Customer(Resource):
+    def post(self):
+        # args = request.args
+        # customer_id = args["customer_id"]
+        return jsonify(["Totally saved all of that, trust me!"])
 
 @product_ns.route("/recommendation")
 @product_ns.expect(recommendation_parser)
