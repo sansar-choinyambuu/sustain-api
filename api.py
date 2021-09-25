@@ -6,9 +6,16 @@ from bson.json_util import dumps
 from bson import json_util
 
 ## local database
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-mydb = myclient["test"]
+# myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+# mydb = myclient["test"]
+# mycol = mydb["customers"]
+
+## local database
+myclient = pymongo.MongoClient("mongodb+srv://sustain:sustain@cluster0.rmjhl.mongodb.net/sustaindb")
+mydb = myclient["sustaindb"]
 mycol = mydb["customers"]
+
+
 
 app = Flask(__name__)
 api = Api(
