@@ -65,7 +65,7 @@ class Mongo:
         customer = self.__find_one__(CUSTOMER_COL, {"id": customer_id})
         ret = {"id": customer["id"]}
         ret["purchases"] = [
-            {"id": p["unix_timestamp"], "products": p["products"]}
+            {"unix_timestamp": p["unix_timestamp"], "products": p["products"]}
             for p in customer["purchases"][:last_n]
         ]
 
