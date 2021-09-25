@@ -81,6 +81,7 @@ class Mongo:
                         "animalwelfare_rating": self.products[p["product_id"]][
                             "animalwelfare_rating"
                         ],
+                        "name": self.products[p["product_id"]]["name"]
                     },
                 }
                 for p in purchase["products"]
