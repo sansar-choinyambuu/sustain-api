@@ -1,8 +1,10 @@
 # Sustainability API
-Provides sustainability scores per customer, purchase and product
+Backend of the ecoMi, provides sustainability scores and product recommendations via REST-API.
+
+Hosted on Azure App Service, see the Swagger UI: https://sustain-api.azurewebsites.net
 
 # Install
 pip install -r requirements.txt
 
-# Usage
+# Debugging
 python api.py
