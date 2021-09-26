@@ -29,16 +29,16 @@ recommendations ={
 }
 
 customer_parser = reqparse.RequestParser()
-customer_parser.add_argument("customer_id", type=str, required=True, help="Customer ID")
+customer_parser.add_argument("customer_id", type=str, required=True, help="Customer ID [e.g. 100688]")
 
 customization_parser = reqparse.RequestParser()
-customization_parser.add_argument("customer_id", type=str, required=True, help="Customer ID")
+customization_parser.add_argument("customer_id", type=str, required=True, help="Customer ID [e.g. 100688]")
 customization_parser.add_argument("footprint", type=str, required=True, help="Carbon footprint")
 customization_parser.add_argument("water", type=str, required=True, help="Water scarcity")
 customization_parser.add_argument("animals", type=str, required=True, help="Animal welfare")
 
 product_parser = reqparse.RequestParser()
-product_parser.add_argument("product_id", type=str, required=True, help="Product ID")
+product_parser.add_argument("product_id", type=str, required=True, help="Product ID [e.g. 100100300000]")
 
 recommendation_parser = reqparse.RequestParser()
 recommendation_parser.add_argument("category", type=str, required=True, help="Category: [meat, dairy]")
